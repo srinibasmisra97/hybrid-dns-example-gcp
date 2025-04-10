@@ -1,0 +1,7 @@
+zone "rpz.local" {
+  type master;
+  file "/etc/bind/zones/db.rpz.local";
+  allow-query { localhost; };
+};
+
+

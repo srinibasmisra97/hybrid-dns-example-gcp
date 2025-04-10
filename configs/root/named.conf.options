@@ -1,0 +1,20 @@
+acl "clouddns" {
+  35.199.192.0/19;
+};
+
+options {
+  directory "/var/cache/bind/";
+
+  recursion yes;
+  allow-recursion { clouddns; };
+  listen-on { 10.0.0.2; };
+  allow-transfer { none; };
+  querylog yes;
+  dnssec-validation no;
+  
+  response-policy { zone "rpz.local"; };
+
+  forwarders {
+    1.1.1.1;
+  };
+};
