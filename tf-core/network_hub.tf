@@ -54,3 +54,15 @@ resource "google_compute_router_nat" "nat" {
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
   nat_ip_allocate_option             = "AUTO_ONLY"
 }
+
+resource "google_compute_network_peering" "hub_to_app" {
+  name = "${local.prefix}-hub-to-app"
+  network = google_compute_network.hub.self_link
+  peer_network = google_compute_network.app.self_link
+}
+
+resource "google_compute_network_peering" "hub_to_infra" {
+  name = "${local.prefix}-hub-to-infra"
+  network = google_compute_network.hub.self_link
+  peer_network = google_compute_network.infra.self_link
+}
